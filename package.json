@@ -1,0 +1,23 @@
+{
+  "name": "searchmdn",
+  "version": "1.0.0",
+  "description": "Puppeteer test script",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/woink/searchMDN.git"
+  },
+  "author": "Ward Price",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/woink/searchMDN/issues"
+  },
+  "homepage": "https://github.com/woink/searchMDN#readme",
+  "dependencies": {
+    "puppeteer": "^5.5.0"
+  }
+}
