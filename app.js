@@ -2,13 +2,13 @@ const puppeteer = require('puppeteer');
 const chalk = require('chalk');
 const inquirer = require('inquirer')
 
-const start = () => {
+const start = async () => {
   inquirer.prompt({
     type: 'input',
     name: 'userInput',
-    message: 'Enter Array method'
+    message: 'Enter array method to search for'
   })
-    .then(res => getResults(res.userInput))
+		.then(res => getResults(res.userInput))
 }
 
 async function getResults(term) {
@@ -18,22 +18,24 @@ async function getResults(term) {
 	await page.type('#main-q', `Array.prototype.${term}`);
 	await page.keyboard.down('Enter');
 	await page.waitForSelector('.result');
+	
 	const resultUrl = await page.evaluate(() => {
     const topResult = document.querySelector('.result-title');
 		return topResult.href;
 	});
 
 	await page.goto(resultUrl);
-	await page.waitForSelector('p');
-	const desc = await page.evaluate(() => {
-    const itemDesc = document.querySelector('p');
-		return itemDesc.innerText;
+
+	const resultDef = await page.evaluate(() => {
+    const termDef = document.querySelector('p');
+		return termDef.innerText;
 	});
 
-	console.log(chalk.magentaBright(desc));
+	browser.close();
+
+	console.log(chalk.magentaBright(resultDef));
 	console.log(chalk.underline.dim(resultUrl));
 
-	browser.close();
 }
 
 start()
